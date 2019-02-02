@@ -84,85 +84,36 @@ wool_weight = 0
 milk_volume = 0
 total_weight = 0
 
+animals = [
+    Goose('Серый', 5, 0),
+    Goose('Белый', 3, 2),
+    Duck('Кряква', 2, 5),
+    Sheep('Кудрявый', 55, 10),
+    Sheep('Барашек', 100, 20),
+    Cow('Манька', 600, 10),
+    Goat('Рога', 50, 5),
+    Goat('Копыта', 66, 7),
+    Chicken('Ко-ко', 1.1, 5),
+    Chicken('Кукареку', 1.5, 0),
+]
 
-goose_grey = Goose('Серый', 5, 0)
-goose_grey.feed()
-egg_count += goose_grey.get_egg()
-total_weight += goose_grey.weight
-heaviest_animal = goose_grey
-print(goose_grey.say_smth())
+heaviest_animal = animals[0]
 
-goose_white = Goose('Белый', 3, 2)
-goose_white.feed()
-egg_count += goose_white.get_egg()
-total_weight += goose_white.weight
-if goose_white.weight > heaviest_animal.weight:
-    heaviest_animal = goose_white
-print(goose_white.say_smth())
+for everyone in animals:
+    everyone.say_smth()
+    everyone.feed()
+    if hasattr(everyone, 'get_milk'):
+        milk_volume += everyone.get_milk()
+    if hasattr(everyone, 'shave'):
+        wool_weight += everyone.shave()
+    if hasattr(everyone, 'get_egg'):
+        egg_count += everyone.get_egg()
+    if everyone.weight > heaviest_animal.weight:
+        heaviest_animal = everyone
 
-duck = Duck('Кряква', 2, 5)
-duck.feed()
-egg_count += duck.get_egg()
-total_weight += duck.weight
-if duck.weight > heaviest_animal.weight:
-    heaviest_animal = duck
-print(duck.say_smth())
-
-sheep_curl = Sheep('Кудрявый', 55, 10)
-sheep_curl.feed()
-wool_weight += sheep_curl.shave()
-total_weight += sheep_curl.weight
-if sheep_curl.weight > heaviest_animal.weight:
-    heaviest_animal = sheep_curl
-print(sheep_curl.say_smth())
-
-sheep_sheep = Sheep('Барашек', 100, 20)
-sheep_sheep.feed()
-wool_weight += sheep_sheep.shave()
-total_weight += sheep_sheep.weight
-if sheep_sheep.weight > heaviest_animal.weight:
-    heaviest_animal = sheep_sheep
-print(sheep_sheep.say_smth())
-
-cow = Cow('Манька', 600, 10)
-cow.feed()
-milk_volume += cow.get_milk()
-total_weight += cow.weight
-if cow.weight > heaviest_animal.weight:
-    heaviest_animal = cow
-print(cow.say_smth())
-
-goat_horn = Goat('Рога', 50, 5)
-goat_horn.feed()
-milk_volume += goat_horn.get_milk()
-total_weight += goat_horn.weight
-if goat_horn.weight > heaviest_animal.weight:
-    heaviest_animal = goat_horn
-print(goat_horn.say_smth())
-
-goat_hoof = Goat('Копыта', 66, 7)
-goat_hoof.feed()
-milk_volume += goat_hoof.get_milk()
-total_weight += goat_hoof.weight
-if goat_hoof.weight > heaviest_animal.weight:
-    heaviest_animal = goat_hoof
-print(goat_hoof.say_smth())
-
-chiken_ko = Chicken('Ко-ко', 1.1, 5)
-chiken_ko.feed()
-egg_count += chiken_ko.get_egg()
-total_weight += chiken_ko.weight
-if chiken_ko.weight > heaviest_animal.weight:
-    heaviest_animal = chiken_ko
-print(chiken_ko.say_smth())
-
-chiken_cock = Chicken('Кукареку', 1.5, 0)
-chiken_cock.feed()
-egg_count += chiken_cock.get_egg()
-total_weight += chiken_cock.weight
-if chiken_cock.weight > heaviest_animal.weight:
-    heaviest_animal = chiken_cock
-print(chiken_cock.say_smth())
+    total_weight += everyone.weight
 
 print(total_weight)
 print(heaviest_animal.name)
+
+
